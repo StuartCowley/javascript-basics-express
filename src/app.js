@@ -6,9 +6,9 @@ const { uppercase } = require('./lib/strings');
 const { lowercase } = require('./lib/strings');
 const { firstCharacter } = require('./lib/strings');
 
-const { add } = require('./lib/numbers');
-const { subtract } = require('./lib/numbers');
-const { multiply } = require('./lib/numbers');
+const { add, subtract, divide, multiply } = require('./lib/numbers');
+// const { subtract } = require('./lib/numbers');
+// const { multiply} = require('./lib/numbers');
 
 const app = express();
 app.use(express.json());
@@ -17,7 +17,7 @@ app.get('/strings/hello/world', (_, res) => {
   res.status(200).json({ result: 'Hello, world!' });
 });
 
-app.get('/strings/hello/:string', (req, res) => {
+app.get('/strings/hello/:string', (req, res) => { 
   res.status(200).json({ result: sayHello(req.params.string) });
 });
 
@@ -38,7 +38,6 @@ app.get('/strings/first-character/:string', (req, res) => {
 
 app.get('/strings/first-characters/:string', (req, res) => {
   const n = req.query.length;
-  // console.log(req);
   res.status(200).json({ result: firstCharacters(req.params.string, n) });
   // res.status(200).json({ result: 'sd32' });
 });
@@ -68,7 +67,9 @@ app.post('/numbers/multiply', (req, res) => {
   if (!a || !b) {
     res.status(400).json({ error: 'Parameters a and b are required.' });
   }
-
+  else if (isNaN(a) || isNaN(b)) {
+    res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
+  }
   res.status(200).json({ result: multiply(req.body.a, req.body.b) });
   console.log({ result: multiply(a, b) });
 });
@@ -77,7 +78,6 @@ app.post('/numbers/multiply', (req, res) => {
   const { a } = req.body;
   const { b } = req.body;
   if (!a || !b) {
-    // eslint-disable-next-line prettier/prettier
     res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
   }
   const parsedA = parseInt(a, 10);
@@ -94,6 +94,31 @@ app.post('/numbers/multiply', (req, res) => {
   }
   res.status(200).json({ result: multiply(a, b) });
 });
+
+app.post('/numbers/divide', (req, res) => {
+  const { a } = req.body;
+  const { b } = req.body;
+
+  if (req.body.a === 0) {
+    res.status(200).json({ result: req.body.a});
+  }  
+  if (req.body.b === 0) {
+    res.status(400).send({ error: 'Unable to divide by 0.' });
+  }
+  else if (!a || !b) {
+    res.status(400).json({ error: 'Parameters a and b are required.' });
+  }
+  else if (isNaN(a) || isNaN(b)) {
+    res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
+  }
+  else {
+    res.status(200).json({ result: divide(req.body.a, req.body.b) });
+  }
+  console.log({ result: divide(a, b) });
+});
+
+
+
 
 // eslint-disable-next-line consistent-return
 // app.get('/numbers/add/:a/and/:b', (req, res) => {
