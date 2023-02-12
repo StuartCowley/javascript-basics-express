@@ -6,13 +6,11 @@
   "[javascriptreact]": {
     "editor.formatOnSave": false
   },
-  "prettier.disableLanguages": [
-    "javascript",
-    "javascriptreact"
-  ],
+  "prettier.disableLanguages": ["javascript", "javascriptreact"],
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "eslint.enable": true
 }
