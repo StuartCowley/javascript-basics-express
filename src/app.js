@@ -184,21 +184,13 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
   res.json({ result: elementsStartingWithAVowel(array) });
 });
 
-/* app.post('/arrays/remove-element', (req, res) => {
-  const { array } = req.body;
-  const index = req.query;
-
-  if (req.query === undefined) {
-    res.json({ result: removeNthElement2(0, array) });
-  }
-  res.json({ result: removeNthElement2(index, array) });
-}); */
-
 app.post('/arrays/remove-element', (req, res) => {
+  const index = parseInt(req.query.index, 0);
   if (req.query.index) {
-    res.json({ result: removeNthElement2(req.query.index, req.body.array) });
+    res.json({ result: removeNthElement2(index, req.body.array) });
+  } else {
+    res.json({ result: removeNthElement2(0, req.body.array) });
   }
-  res.json({ result: removeNthElement2(0, req.body.array) });
 });
 
 module.exports = app;
