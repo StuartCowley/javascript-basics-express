@@ -21,7 +21,6 @@ const {
   arrayToCSVString,
   addToArray2,
   elementsStartingWithAVowel,
-  removeNthElement,
   removeNthElement2,
 } = require('./lib/arrays');
 
@@ -38,9 +37,11 @@ app.get('/strings/lower/:string', (req, res) => {
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
-  req.query.length
-    ? res.json({ result: firstCharacters(req.params.string, req.query.length) })
-    : res.json({ result: firstCharacter(req.params.string) });
+  if (req.query.length) {
+    res.json({ result: firstCharacters(req.params.string, req.query.length) });
+  } else {
+    res.json({ result: firstCharacter(req.params.string) });
+  }
 });
 
 // numbers
@@ -48,17 +49,21 @@ app.get('/strings/first-characters/:string', (req, res) => {
 app.get('/numbers/add/:a/and/:b', (req, res) => {
   const a = parseInt(req.params.a, 10);
   const b = parseInt(req.params.b, 10);
-  Number.isNaN(a) || Number.isNaN(b)
-    ? res.status(400).json({ error: 'Parameters must be valid numbers.' })
-    : res.status(200).json({ result: add(a, b) });
+  if (Number.isNaN(a) || Number.isNaN(b)) {
+    res.status(400).json({ error: 'Parameters must be valid numbers.' });
+  } else {
+    res.status(200).json({ result: add(a, b) });
+  }
 });
 
 app.get('/numbers/subtract/:a/from/:b', (req, res) => {
   const a = parseInt(req.params.a, 10);
   const b = parseInt(req.params.b, 10);
-  Number.isNaN(a) || Number.isNaN(b)
-    ? res.status(400).json({ error: 'Parameters must be valid numbers.' })
-    : res.status(200).json({ result: subtract(b, a) });
+  if (Number.isNaN(a) || Number.isNaN(b)) {
+    res.status(400).json({ error: 'Parameters must be valid numbers.' });
+  } else {
+    res.status(200).json({ result: subtract(b, a) });
+  }
 });
 
 app.post('/numbers/multiply', (req, res) => {
@@ -106,8 +111,6 @@ app.post('/numbers/divide', (req, res) => {
 
 app.post('/numbers/remainder', (req, res) => {
   let { a, b } = req.body;
-  // const aIsNum = typeof a === 'number';
-  // const bIsNum = typeof b === 'number';
 
   if (a === undefined || b === undefined) {
     res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
