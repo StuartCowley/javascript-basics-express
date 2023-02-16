@@ -8,7 +8,13 @@ const { firstCharacter } = require('./lib/strings');
 
 const { add, subtract, divide, multiply, remainder } = require('./lib/numbers');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
-const { getNthElement, arrayToCSVString } = require('./lib/arrays');
+const {
+  getNthElement,
+  arrayToCSVString,
+  addToArray2,
+  elementsStartingWithAVowel,
+  removeNthElement2,
+} = require('./lib/arrays');
 
 const app = express();
 app.use(express.json());
@@ -29,12 +35,10 @@ app.get('/strings/upper/:string', (req, res) => {
 });
 
 app.get('/strings/lower/:string', (req, res) => {
-  // const result = req.params.string.toLowerCase();
   res.status(200).json({ result: lowercase(req.params.string) });
 });
 
 app.get('/strings/first-character/:string', (req, res) => {
-  // const result = req.params.string.charAt(0);
   res.status(200).json({ result: firstCharacter(req.params.string) });
 });
 
@@ -47,8 +51,8 @@ app.get('/strings/first-characters/:string', (req, res) => {
 // numbers section
 
 app.get('/numbers/add/:a/and/:b', (req, res) => {
-  const a = parseInt(req.params.a);
-  const b = parseInt(req.params.b);
+  const a = parseInt(req.params.a, 10);
+  const b = parseInt(req.params.b, 10);
   if (isNaN(a) || isNaN(b)) {
     res.status(400).json({ error: 'Parameters must be valid numbers.' });
   }
@@ -56,8 +60,8 @@ app.get('/numbers/add/:a/and/:b', (req, res) => {
 });
 
 app.get('/numbers/subtract/:a/from/:b', (req, res) => {
-  const a = parseInt(req.params.a);
-  const b = parseInt(req.params.b);
+  const a = parseInt(req.params.a, 10);
+  const b = parseInt(req.params.b, 10);
   if (isNaN(a) || isNaN(b)) {
     res.status(400).json({ error: 'Parameters must be valid numbers.' });
   }
@@ -130,17 +134,6 @@ app.post('/numbers/remainder', (req, res) => {
   console.log({ result: remainder(a, b) });
 });
 
-// app.get('/numbers/add/:a/and/:b', (req, res) => {
-//   const a = parseFloat(req.params.a);
-//   const b = parseFloat(req.params.b);
-//   console.log(a, b);
-//   if (isNaN(a) || isNaN(b)) {
-//     res.status(400).json({ error: 'Parameters must be valid numbers.' });
-//   }
-//   const result = a + b;
-//   res.status(200).json({ result });
-// });
-
 // booleans section
 
 app.post('/booleans/negate', (req, res) => {
@@ -155,7 +148,7 @@ app.post('/booleans/truthiness', (req, res) => {
 
 app.get('/booleans/is-odd/:number', (req, res) => {
   const value = parseInt(req.params.number, 10);
-
+  // eslint-disable-next-line no-restricted-globals
   if (isNaN(value)) {
     res.status(400).json({ error: 'Parameter must be a number.' });
   } else {
@@ -189,21 +182,34 @@ app.post('/arrays/to-string', (req, res) => {
 
 app.post('/arrays/append', (req, res) => {
   const { array, value } = req.body;
-
   res.status(200).json({ result: addToArray2(value, array) });
 });
 
 app.post('/arrays/starts-with-vowel', (req, res) => {
   const { array } = req.body;
-
   res.status(200).json({ result: elementsStartingWithAVowel(array) });
 });
 
-app.post('/arrays/remove-element', (req, res) => {
-  const { index } = req.query;
-  const { array } = req.body;
+// app.post('/arrays/remove-element', (req, res) => {
+//   const index = parseInt(req.query.index, 10);
+//   console.log(index);
+//   const { array } = req.body;
+//   if (req.query.index) {
+//     res.status(200).json({ result: removeNthElement2(index, array) });
+//   } else {
+//     res.status(200).json({ result: removeNthElement2(0, array) });
+//   }
+// });
 
-  res.status(200).json({ result: removeNthElement2(index, array) });
+app.post('/arrays/remove-element', (req, res) => {
+  const index = parseInt(req.query.index, 10);
+  console.log('Index:', index);
+  console.log('Array:', req.body.array);
+  if (req.query.index) {
+    res.status(200).json({ result: removeNthElement2(index, req.body.array) });
+  } else {
+    res.status(200).json({ result: removeNthElement2(0, req.body.array) });
+  }
 });
 
 module.exports = app;
