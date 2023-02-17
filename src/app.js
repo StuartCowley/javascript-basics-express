@@ -3,12 +3,13 @@ const express = require('express');
 
 const strings = require('./lib/strings');
 const numbers = require('./lib/numbers');
+const booleans = require('./lib/booleans');
 
 const app = express();
 
 app.use(express.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
 
+// STRINGS //
 app.get('/strings/hello/:thing', (req, res) => {
   const { thing } = req.params;
   res.status(200);
@@ -34,6 +35,8 @@ app.get('/strings/first-characters/:string', (req, res) => {
   }
   res.send({ result: strings.firstCharacter(string) });
 });
+
+// NUMBERS //
 
 app.get('/numbers/add/:a/and/:b', (req, res) => {
   const { a } = req.params;
@@ -70,4 +73,39 @@ app.post('/numbers/multiply', (req, res) => {
   res.status(200);
   res.send({ result: numbers.multiply(Number(b), Number(a)) });
 });
+
+// BOOLEANS //
+app.post('/booleans/negate', (req, res) => {
+  res.status(200);
+  const { value } = req.body;
+  res.send({ result: booleans.negate(value) });
+});
+
+app.post('/booleans/truthiness', (req, res) => {
+  res.status(200);
+  const { value } = req.body;
+  res.send({ result: booleans.truthiness(value) });
+});
+
+app.get('/booleans/is-odd/:number', (req, res) => {
+  const { number } = req.params;
+  if (isNaN(number)) {
+    res.status(400);
+    res.send({ error: 'Parameter must be a number.' });
+  }
+  res.status(200);
+  res.send({ result: booleans.isOdd(number) });
+});
+
+app.get('/booleans/:string/starts-with/:char', (req, res) => {
+  const { string } = req.params;
+  const { char } = req.params;
+  if (char.length > 1) {
+    res.status(400);
+    res.send({ error: 'Parameter "character" must be a single character.' });
+  }
+  res.status(200);
+  res.send({ result: booleans.startsWith(char, string) });
+});
+
 module.exports = app;
