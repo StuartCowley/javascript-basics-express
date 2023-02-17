@@ -4,6 +4,7 @@ const express = require('express');
 const strings = require('./lib/strings');
 const numbers = require('./lib/numbers');
 const booleans = require('./lib/booleans');
+const arrays = require('./lib/arrays');
 
 const app = express();
 
@@ -106,6 +107,46 @@ app.get('/booleans/:string/starts-with/:char', (req, res) => {
   }
   res.status(200);
   res.send({ result: booleans.startsWith(char, string) });
+});
+
+// ARRAYS //
+
+app.post('/arrays/element-at-index/:index', (req, res) => {
+  res.status(200);
+  const { index } = req.params;
+  const { array } = req.body;
+  // const { index } = req.body;
+  res.send({ result: arrays.getNthElement(index, array) });
+});
+
+app.post('/arrays/to-string', (req, res) => {
+  res.status(200);
+  const { array } = req.body;
+  res.send({ result: arrays.arrayToCSVString(array) });
+});
+
+app.post('/arrays/append', (req, res) => {
+  res.status(200);
+  const { array, value } = req.body;
+  res.send({ result: arrays.addToArray2(value, array) });
+});
+
+app.post('/arrays/starts-with-vowel', (req, res) => {
+  res.status(200);
+  const { array } = req.body;
+  res.send({ result: arrays.elementsStartingWithAVowel(array) });
+});
+
+app.post('/arrays/remove-element', (req, res) => {
+  res.status(200);
+  const { array } = req.body;
+  const { index } = req.query;
+  if (index > 0) {
+    const newArr = arrays.removeNthElement2(+index, array);
+    res.send({ result: newArr });
+  } else {
+    res.send({ result: arrays.removeNthElement2(0, array) });
+  }
 });
 
 module.exports = app;
