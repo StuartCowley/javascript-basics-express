@@ -1,36 +1,29 @@
 const getNthElement = (index, array) => {
-  // your code here
   return array[index % array.length];
   // return array[index];
 };
 
 const arrayToCSVString = array => {
-  // your code here
   return array.join(',');
 };
 
 const csvStringToArray = string => {
-  // your code here
   return string.split(',');
 };
 
 const addToArray = (element, array) => {
-  // your code here
-  array = array.push(element);
+  return array.push(element);
 };
 
 const addToArray2 = (element, array) => {
-  newArray = array.concat(element);
-  return newArray;
+  return array.concat(element);
 };
 
 const removeNthElement = (index, array) => {
-  // your code here
-  array.splice(index, 1);
+  return array.splice(index, 1);
 };
 
 const numbersToStrings = numbers => {
-  // your code here
   // return numbers.map(String);
   const numString = numbers.map(number => {
     return String(number);
@@ -39,7 +32,6 @@ const numbersToStrings = numbers => {
 };
 
 const uppercaseWordsInArray = strings => {
-  // your code here
   const newArray = strings.map(string => {
     return string.toUpperCase();
   });
@@ -70,29 +62,35 @@ const onlyEven = numbers => {
     }
   });
   return evenOnly;
-  // your code here
 };
 
 const removeNthElement2 = (index, array) => {
-  // your code here
+  const newArray = [...array];
+  newArray.splice(index, 1);
+  return newArray;
 };
 
 const elementsStartingWithAVowel = strings => {
-  // your code here
+  const stringNew = strings.filter(string => {
+    const testString = string.toLowerCase();
+    return (
+      testString[0] === 'a' ||
+      testString[0] === 'e' ||
+      testString[0] === 'i' ||
+      testString[0] === 'o' ||
+      testString[0] === 'u'
+    );
+  });
+  return stringNew;
 };
 
-const removeSpaces = string => {
-  // your code here
-};
+const removeSpaces = string => {};
 
 const sumNumbers = numbers => {
-  // your code here
   const sum = numbers.reduce(number => {});
 };
 
-const sortByLastLetter = strings => {
-  // your code here
-};
+const sortByLastLetter = strings => {};
 
 module.exports = {
   getNthElement,
@@ -109,5 +107,5 @@ module.exports = {
   elementsStartingWithAVowel,
   removeSpaces,
   sumNumbers,
-  sortByLastLetter
+  sortByLastLetter,
 };

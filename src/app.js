@@ -5,8 +5,41 @@ const app = express();
 const { uppercase, lowercase, firstCharacter, firstCharacters } = require('./lib/strings');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const { truthiness, isOdd, startsWith } = require('./lib/booleans');
+const { elementsStartingWithAVowel, removeNthElement2 } = require('./lib/arrays');
 
 app.use(express.json());
+
+app.post('/arrays/remove-element', (req, res) => {
+  const { index } = req.query;
+  const { array } = req.body;
+  const indexNum = parseInt(index, 10);
+  const newArr = removeNthElement2(indexNum, array);
+  res.status(200).send({ result: newArr });
+});
+
+app.post('/arrays/starts-with-vowel', (req, res) => {
+  const { array } = req.body;
+  const newArr = elementsStartingWithAVowel(array);
+  res.status(200).send({ result: newArr });
+});
+
+app.post('/arrays/to-string', (req, res) => {
+  const { array } = req.body;
+  res.status(200).send({ result: array.join(',') });
+});
+
+app.post('/arrays/element-at-index/:index', (req, res) => {
+  const { index } = req.params;
+  const { array } = req.body;
+  res.status(200).send({ result: array[index] });
+});
+
+app.post('/arrays/append', (req, res) => {
+  const { value } = req.body;
+  const [...array] = req.body.array;
+  array.push(value);
+  res.status(200).send({ result: array });
+});
 
 app.get('/booleans/:string/starts-with/:char', (req, res) => {
   const { string, char } = req.params;
