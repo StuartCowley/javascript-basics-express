@@ -1,7 +1,7 @@
 const { arrayToCSVString } = require('./arrays');
 
 function negate(a) {
-  // your code here
+  return !a;
 }
 
 function both(a, b) {
@@ -21,7 +21,10 @@ function one(a, b) {
 }
 
 function truthiness(a) {
-  // your code here
+  if (!a) {
+    return false;
+  }
+  return true;
 }
 
 function isEqual(a, b) {
@@ -37,7 +40,13 @@ function isLessThanOrEqualTo(a, b) {
 }
 
 function isOdd(a) {
-  // your code here
+  if (typeof a !== 'number') {
+    return 'err';
+  }
+  if (a % 2 === 1) {
+    return true;
+  }
+  return false;
 }
 
 function isEven(a) {
@@ -49,7 +58,10 @@ function isSquare(a) {
 }
 
 function startsWith(char, string) {
-  // your code here
+  if (string[0] === char) {
+    return true;
+  }
+  return false;
 }
 
 function containsVowels(string) {
@@ -75,5 +87,5 @@ module.exports = {
   isSquare,
   startsWith,
   containsVowels,
-  isLowerCase
+  isLowerCase,
 };
