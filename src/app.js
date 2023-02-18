@@ -16,10 +16,12 @@ const {
   removeNthElement2,
 } = require('./lib/arrays');
 
+// Middleware
+
 const app = express();
 app.use(express.json());
 
-// strings section
+// Strings Section
 
 app.get('/strings/hello/world', (_, res) => {
   res.status(200).json({ result: 'Hello, world!' });
@@ -45,10 +47,9 @@ app.get('/strings/first-character/:string', (req, res) => {
 app.get('/strings/first-characters/:string', (req, res) => {
   const n = req.query.length;
   res.status(200).json({ result: firstCharacters(req.params.string, n) });
-  // res.status(200).json({ result: 'sd32' });
 });
 
-// numbers section
+// Numbers Section
 
 app.get('/numbers/add/:a/and/:b', (req, res) => {
   const a = parseInt(req.params.a, 10);
@@ -134,7 +135,7 @@ app.post('/numbers/remainder', (req, res) => {
   console.log({ result: remainder(a, b) });
 });
 
-// booleans section
+// Booleans Section
 
 app.post('/booleans/negate', (req, res) => {
   const { value } = req.body;
@@ -148,7 +149,6 @@ app.post('/booleans/truthiness', (req, res) => {
 
 app.get('/booleans/is-odd/:number', (req, res) => {
   const value = parseInt(req.params.number, 10);
-  // eslint-disable-next-line no-restricted-globals
   if (isNaN(value)) {
     res.status(400).json({ error: 'Parameter must be a number.' });
   } else {
@@ -167,7 +167,7 @@ app.get('/booleans/:word/starts-with/:character', (req, res) => {
   }
 });
 
-// arrays section
+// Arrays Section
 
 app.post('/arrays/element-at-index/:index', (req, res) => {
   const { index } = req.params;
@@ -190,25 +190,16 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
   res.status(200).json({ result: elementsStartingWithAVowel(array) });
 });
 
-// app.post('/arrays/remove-element', (req, res) => {
-//   const index = parseInt(req.query.index, 10);
-//   console.log(index);
-//   const { array } = req.body;
-//   if (req.query.index) {
-//     res.status(200).json({ result: removeNthElement2(index, array) });
-//   } else {
-//     res.status(200).json({ result: removeNthElement2(0, array) });
-//   }
-// });
-
 app.post('/arrays/remove-element', (req, res) => {
   const index = parseInt(req.query.index, 10);
+  const { array } = req.body;
+
   console.log('Index:', index);
   console.log('Array:', req.body.array);
   if (req.query.index) {
-    res.status(200).json({ result: removeNthElement2(index, req.body.array) });
+    res.status(200).json({ result: removeNthElement2(index, array) });
   } else {
-    res.status(200).json({ result: removeNthElement2(0, req.body.array) });
+    res.status(200).json({ result: removeNthElement2(0, array) });
   }
 });
 
