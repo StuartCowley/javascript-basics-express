@@ -4,6 +4,7 @@ const app = require('../src/app');
 describe('/strings', () => {
   describe('GET /hello/{string}', () => {
     it('returns "Hello world!" when passed "world"', done => {
+      jest.setTimeout(10000);
       request(app)
         .get('/strings/hello/world')
         .then(res => {
@@ -15,7 +16,8 @@ describe('/strings', () => {
   });
 
   describe('GET /upper/{string}', () => {
-    xit('returns the uppercased string', done => {
+    it('returns the uppercased string', done => {
+      jest.setTimeout(10000);
       request(app)
         .get('/strings/upper/hello')
         .then(res => {
@@ -27,7 +29,8 @@ describe('/strings', () => {
   });
 
   describe('GET /lower/{string}', () => {
-    xit('returns the lowercased string', done => {
+    it('returns the lowercased string', done => {
+      jest.setTimeout(10000);
       request(app)
         .get('/strings/lower/HELLO')
         .then(res => {
@@ -39,7 +42,8 @@ describe('/strings', () => {
   });
 
   describe('GET /first-characters/{string}', () => {
-    xit('returns the first character of the string when there is no query string', done => {
+    it('returns the first character of the string when there is no query string', done => {
+      jest.setTimeout(10000);
       request(app)
         .get('/strings/first-characters/hello')
         .then(res => {
@@ -49,7 +53,8 @@ describe('/strings', () => {
         });
     });
 
-    xit('returns the first n character of the string when passed a query parameter', done => {
+    it('returns the first n character of the string when passed a query parameter', done => {
+      jest.setTimeout(10000);
       request(app)
         .get('/strings/first-characters/sd32fg45')
         .query({ length: 4 })

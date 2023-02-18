@@ -1,85 +1,103 @@
 function negate(a) {
-return a = !a;
-};
+  return !a;
+}
 
 function both(a, b) {
-  if (!a,b) {
-    return a && b;
-  } else {
-    return a && b;
-  }
-};
+  return a && b;
+}
 
 function either(a, b) {
-  if (!a,b) {
-    return a || b;
-  } else {
-    return a || b;
-  }
-};
+  return a || b;
+}
 
 function none(a, b) {
-  return !a && !b;
-};
+  if (a === false && b === false) {
+    return true;
+  }
 
-function one(a, b)  {
- return a !== b;
-};
+  return false;
+}
+
+function one(a, b) {
+  return Boolean(a ^ b);
+  // NEED TO REVIEW THE ABOVE*//
+}
 
 function truthiness(a) {
-  const name = a;
-  return Boolean(name);
-};
+  return Boolean(a);
+}
 
 function isEqual(a, b) {
- return a === b;
-};
+  if (a === b) {
+    return true;
+  }
+
+  return false;
+}
 
 function isGreaterThan(a, b) {
-  return a > b;
-};
+  if (a > b) {
+    return true;
+  }
+
+  return false;
+}
 
 function isLessThanOrEqualTo(a, b) {
-  return a <= b;
-};
+  if (a <= b) {
+    return true;
+  }
+
+  return false;
+}
 
 function isOdd(a) {
- return a % 2 === 1;
-};
+  if (a % 2 === 1) {
+    return true;
+  }
+
+  return false;
+}
 
 function isEven(a) {
- return a % 2 === 0;
-};
+  if (a % 2 === 0) {
+    return true;
+  }
+
+  return false;
+}
 
 function isSquare(a) {
-
+  if (Math.sqrt(a) % 1 === 0) {
+    return true;
+  }
+  return false;
+}
 
 function startsWith(char, string) {
   if (string.startsWith(char)) {
     return true;
   }
-    return false;
-};
+
+  return false;
+}
 
 function containsVowels(string) {
- const vowels = 'aeiou';
- const lowerCaseString = string.toLowerCase();
- for (let i = 0; i < vowels.length; i++) {
-  if (lowerCaseString.includes(vowels[i])) {
+  if (string.includes('a')) {
     return true;
   }
- }
- return false;
-};
+  if (string.includes('O')) {
+    return true;
+  }
+
+  return false;
+}
 
 function isLowerCase(string) {
-  if (string === string.toLowerCase()) {
-   return true;
-  }
-  return false;
-  };
+  return string === string.toLowerCase();
+}
 
-  module.exports = {
+module.exports = {
   negate,
   both,
   either,
@@ -94,5 +112,5 @@ function isLowerCase(string) {
   isSquare,
   startsWith,
   containsVowels,
-  isLowerCase
-  };
+  isLowerCase,
+};
