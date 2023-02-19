@@ -145,5 +145,18 @@ describe('/booleans', () => {
           done();
         });
     });
+    // Extra test to test .match(/[aeiou]/i) on containsVowels
+    describe('POST /vowels', () => {
+      it('returns true when passed word with vowel', done => {
+        request(app)
+          .post('/booleans/vowls')
+          .send({ value: 'hello' })
+          .then(res => {
+            expect(res.status).toEqual(200);
+            expect(res.body).toEqual({ result: true });
+            done();
+          });
+      });
+    });
   });
 });

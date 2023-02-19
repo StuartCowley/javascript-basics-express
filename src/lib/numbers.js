@@ -35,13 +35,7 @@ function absolute(a) {
 }
 
 function quotient(a, b) {
-  let solution;
-  if (a > 0 && b > 0) {
-    solution = Math.floor(a / b);
-  } else {
-    solution = Math.ceil(a / b);
-  }
-  return solution;
+  return Math.trunc(a / b);
 }
 
 function remainder(a, b) {

@@ -19,10 +19,7 @@ function one(a, b) {
 }
 
 function truthiness(a) {
-  if (a) {
-    return true;
-  }
-  return false;
+  return !!a;
 }
 
 function isEqual(a, b) {
@@ -42,7 +39,7 @@ function isOdd(a) {
 }
 
 function isEven(a) {
-  return 1 + (a % 2) === 1;
+  return a % 2 === 0;
 }
 
 function isSquare(a) {
@@ -54,15 +51,7 @@ function startsWith(char, string) {
 }
 
 function containsVowels(string) {
-  let vowelsCount = 0;
-  const str = string.toLowerCase();
-  const vowels = ['a', 'e', 'i', 'o', 'u'];
-  for (const char of str) {
-    if (vowels.includes(char)) {
-      vowelsCount++;
-    }
-  }
-  return vowelsCount > 0;
+  return !!string.match(/[aeiou]/i);
 }
 
 function isLowerCase(string) {

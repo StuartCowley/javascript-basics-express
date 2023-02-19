@@ -256,5 +256,17 @@ describe('/numbers', () => {
           done();
         });
     });
+    // Extra test to test Math.trunc on quotient
+    describe('GET /quotient/{number}/and/{number}', () => {
+      it('quotient 2 and 1', done => {
+        request(app)
+          .get('/numbers/quotient/2/and/1')
+          .then(res => {
+            expect(res.status).toEqual(200);
+            expect(res.body).toEqual({ result: 2 });
+            done();
+          });
+      });
+    });
   });
 });

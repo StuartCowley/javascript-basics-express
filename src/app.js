@@ -1,7 +1,7 @@
 const express = require('express');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
-const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
-const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
+const { add, subtract, multiply, divide, remainder, quotient } = require('./lib/numbers');
+const { negate, truthiness, isOdd, startsWith, containsVowels } = require('./lib/booleans');
 const {
   getNthElement,
   arrayToCSVString,
@@ -11,7 +11,6 @@ const {
 } = require('./lib/arrays');
 
 const app = express();
-const router = express.Router();
 
 app.use(express.json());
 
@@ -97,6 +96,12 @@ app.post('/numbers/remainder', (req, res) => {
   }
 });
 
+// Extra test to test Math.trunc on quotient
+
+app.get('/numbers/quotient/:num1/and/:num2', (req, res) => {
+  res.status(200).json({ result: quotient(req.params.num1, req.params.num2) });
+});
+
 // Booleans
 
 app.post('/booleans/negate', (req, res) => {
@@ -117,6 +122,12 @@ app.get('/booleans/:string/starts-with/:letter', (req, res) => {
   return req.params.letter.length === 1
     ? res.status(200).json({ result: startsWith(req.params.letter, req.params.string) })
     : res.status(400).json({ error: 'Parameter "character" must be a single character.' });
+});
+
+// Extra test to test .match(/[aeiou]/i) on containsVowels
+
+app.post('/booleans/vowls', (req, res) => {
+  res.status(200).json({ result: containsVowels(req.body.value) });
 });
 
 // Arrays

@@ -15,7 +15,8 @@ const addToArray = (element, array) => {
 };
 
 const addToArray2 = (element, array) => {
-  return (array2 = array.concat(element));
+  const array2 = array.concat(element);
+  return array2;
 };
 
 const removeNthElement = (index, array) => {
@@ -23,37 +24,24 @@ const removeNthElement = (index, array) => {
 };
 
 const numbersToStrings = numbers => {
-  for (let i = 0; i < numbers.length; i++) {
-    numbers[i] = String(numbers[i]);
-  }
-  return numbers;
+  return numbers.map(number => String(number));
 };
 
 const uppercaseWordsInArray = strings => {
-  for (let i = 0; i < strings.length; i++) {
-    strings[i] = strings[i].toUpperCase();
-  }
-  return strings;
+  return strings.map(string => string.toUpperCase());
 };
 
 const reverseWordsInArray = strings => {
-  for (let i = 0; i < strings.length; i++) {
-    strings[i] = strings[i]
+  return strings.map(string =>
+    string
       .split('')
       .reverse()
-      .join('');
-  }
-  return strings;
+      .join(''),
+  );
 };
 
 const onlyEven = numbers => {
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] % 2 === 0) {
-    } else {
-      numbers.splice(i, 1);
-    }
-  }
-  return numbers;
+  return numbers.filter(number => number % 2 === 0);
 };
 
 const removeNthElement2 = (index, array) => {
@@ -64,16 +52,7 @@ const removeNthElement2 = (index, array) => {
 
 const elementsStartingWithAVowel = strings => {
   const vowels = ['a', 'e', 'i', 'o', 'u'];
-  for (let i = 0; i < strings.length; i++) {
-    if (vowels.includes(strings[i].slice(0, 1).toLowerCase())) {
-    } else {
-      strings.splice(i, 1);
-      i--;
-    }
-  }
-  return strings
-    .concat()
-    .reduce((accumulator, currentValue) => accumulator.concat(currentValue), []);
+  return strings.filter(string => vowels.includes(string[0].toLowerCase()));
 };
 
 const removeSpaces = string => {
@@ -81,8 +60,7 @@ const removeSpaces = string => {
 };
 
 const sumNumbers = numbers => {
-  const intVal = 0;
-  return numbers.reduce((acc, curr) => acc + curr, intVal);
+  return numbers.reduce((acc, curr) => acc + curr, 0);
 };
 
 const sortByLastLetter = strings => {
