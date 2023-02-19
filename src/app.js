@@ -138,7 +138,6 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
 });
 
 app.post('/arrays/remove-element', (req, res) => {
-  console.log(removeNthElement2(req.query.index, req.body.array));
   res.status(200).json({ result: removeNthElement2(req.query.index, req.body.array) });
 });
 
