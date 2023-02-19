@@ -4,11 +4,12 @@
 
 Ensure your Visual Studio Code application is up to date, and that you have the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed and enabled.
 
+Fork and clone the repo https://github.com/CommandShiftHQ/javascript-basics-express
+
 Run the commands below inside your `Projects` folder.
 
 ```bash
-git clone git@github.com:MCRcodes/javascript-basics-express.git
-cd your-project-folder-name
+cd javascript-basics-express
 npm install
 ```
 
