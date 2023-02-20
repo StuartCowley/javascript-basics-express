@@ -14,13 +14,13 @@ npm install
 
 ## Running tests
 
-You can run tests with the `npm test` command and start the server with 'npm run start'.
+You can run tests with the `npm test` command and start the server with `npm run start`.
 
 ## Endpoints
 
 The API contains the following endpoints:
 
-/arrays/remove-element
+`/arrays/remove-element`
 Method: POST
 Parameters: index (query parameter), array (request body)
 Description: Removes an element from the array at the specified index and returns the new array.
