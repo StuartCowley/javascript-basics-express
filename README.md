@@ -21,9 +21,9 @@ You can run tests with the `npm test` command and start the server with `npm run
 The API contains the following endpoints:
 
 `/arrays/remove-element`
-Method: POST
-Parameters: index (query parameter), array (request body)
-Description: Removes an element from the array at the specified index and returns the new array.
+- Method: POST
+- Parameters: index (query parameter), array (request body)
+- Description: Removes an element from the array at the specified index and returns the new array.
 
 
 
