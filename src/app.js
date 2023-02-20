@@ -111,4 +111,47 @@ app.post('/numbers/remainder', (req, res) => {
   }
 });
 
+// HAVE A LOOK AND RE VISIT THE STRINGS
+app.post('/arrays/element-at-index/:index', (req, res) => {
+  const { index } = req.params;
+  const { array } = req.body;
+  const result = array[index];
+  res.status(200).json({ result });
+});
+
+app.post('/arrays/element-at-index/:index', (req, res) => {
+  const { index } = req.params;
+  const { array } = req.body;
+  const result = array[index];
+  res.status(200).json({ result });
+});
+
+app.post('/arrays/to-string', (req, res) => {
+  const { array } = req.body;
+  const result = array.join(',');
+  res.status(200).json({ result });
+});
+
+app.post('/arrays/append', (req, res) => {
+  const { array, value } = req.body;
+  const result = [...array, value];
+  res.status(200).json({ result });
+});
+
+const startsWithVowel = str => {
+  return ['a', 'e', 'i', 'o', 'u'].includes(str[0]);
+};
+
+app.post('/arrays/starts-with-vowel', (req, res) => {
+  const { array } = req.body;
+  const result = array.filter(str => startsWithVowel(str));
+  res.status(200).json({ result });
+});
+
+app.post('/arrays/remove-element', (req, res) => {
+  const { array } = req.body;
+  const [, ...result] = array;
+  res.status(200).json({ result });
+});
+
 module.exports = app;
