@@ -1,6 +1,6 @@
 # JavaScript Basics in Express
 
-## Getting started
+## Getting started - Remember to personalise for the work I did using the README guides previously posted by other students, esp Cruise Ships!
 
 Ensure your Visual Studio Code application is up to date, and that you have the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed and enabled.
 
