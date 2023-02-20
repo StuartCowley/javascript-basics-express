@@ -1,38 +1,32 @@
 # JavaScript Basics in Express
 
-## Getting started
+A simple Express API that contains a set of endpoints for manipulating arrays, booleans, and numbers.
 
-Ensure your Visual Studio Code application is up to date, and that you have the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed and enabled.
+## Requirements
 
-Run the commands below inside your `Projects` folder.
+To run the project, you will need node.js and npm.
+
+To install the project, clone the repository, navigate to the project directory, and run the following command:
 
 ```bash
-git clone git@github.com:MCRcodes/javascript-basics-express.git
-cd your-project-folder-name
 npm install
-```
-
-## Copy over your JavaScript Basics code
-
-:rotating_light: **Important!**
-
-This exercise makes use of your previous `javascript-basics` code. Copy the files from that project's `src/` folder into a new `lib/` directory in this repository's `src` directory. You should end up with the following file structure in this project:
-
-```
-src
-├── app.js
-└── lib
-    ├── arrays.js
-    ├── booleans.js
-    ├── numbers.js
-    ├── objects.js
-    └── strings.js
 ```
 
 ## Running tests
 
-You can run tests with the `npm test` command.
+You can run tests with the `npm test` command and start the server with 'npm run start'.
 
-## Remember: READMEs are important!
+## Endpoints
 
-When you're finished, be sure to rewrite this one so it's more specific to your project.
+The API contains the following endpoints:
+
+/arrays/remove-element
+Method: POST
+Parameters: index (query parameter), array (request body)
+Description: Removes an element from the array at the specified index and returns the new array.
+
+
+
+
+
+
