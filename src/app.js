@@ -154,4 +154,42 @@ app.post('/arrays/remove-element', (req, res) => {
   res.status(200).json({ result });
 });
 
+app.post('/booleans/negate', (req, res) => {
+  const { value } = req.body;
+  if (value === true) {
+    res.json({ result: false });
+  } else if (value === false) {
+    res.json({ result: true });
+  } else {
+    res.status(400).json({ error: 'Invalid input value' });
+  }
+});
+
+app.post('/booleans/truthiness', (req, res) => {
+  const { value } = req.body;
+  if (value === '' || value === 0 || value === null) {
+    res.json({ result: false });
+  } else {
+    res.json({ result: true });
+  }
+});
+
+app.get('/booleans/is-odd/:number', (req, res) => {
+  const number = Number(req.params.number);
+  if (isNaN(number)) {
+    res.status(400).json({ error: 'Parameter must be a number.' });
+  } else {
+    res.json({ result: number % 2 === 1 });
+  }
+});
+
+app.get('/booleans/:string/starts-with/:character', (req, res) => {
+  const { string } = req.params;
+  const { character } = req.params;
+  if (character.length !== 1) {
+    res.status(400).json({ error: 'Parameter "character" must be a single character.' });
+  } else {
+    res.json({ result: string.startsWith(character) });
+  }
+});
 module.exports = app;
