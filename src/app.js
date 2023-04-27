@@ -21,12 +21,10 @@ app.get('/strings/lower/:string', (req, res) => {
 });
 
 app.get('/strings/first-characters/:string', (req, res) => {
-  res.status(200).json({ result: firstCharacter(req.params.string) });
-});
-
-app.get('/strings/first-characters/:string', (req, res) => {
   const n = req.query.length;
-  res.status(200).json({ result: firstCharacters(req.params.length, n) });
+  res.status(200).json({
+    result: n ? firstCharacters(req.params.string, n) : firstCharacter(req.params.string),
+  });
 });
 
 module.exports = app;
