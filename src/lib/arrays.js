@@ -20,7 +20,7 @@ const addToArray2 = (element, array) => {
   return newArray;
 };
 
-const removeNthElement = (index, array) => {
+const removeNthElement = (index = 0, array) => {
   array.splice(index, 1);
   return array;
 };
@@ -96,5 +96,5 @@ module.exports = {
   elementsStartingWithAVowel,
   removeSpaces,
   sumNumbers,
-  sortByLastLetter
+  sortByLastLetter,
 };
