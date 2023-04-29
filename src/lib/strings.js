@@ -18,7 +18,7 @@ function firstCharacter(string) {
   return string.charAt(0);
 }
 
-function firstCharacters(string, n) {
+function firstCharacters(string, n = 1) {
   return string.slice(0, n);
 }
 
