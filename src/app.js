@@ -1,6 +1,7 @@
 const express = require('express');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
+const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
 const {
   getNthElement,
   arrayToCSVString,
@@ -13,27 +14,27 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/strings/hello/:id', (req, res) => {
+app.get('/strings/hello/:string', (req, res) => {
   res.status(200).json({
-    result: sayHello(req.params.id),
+    result: sayHello(req.params.string),
   });
 });
 
-app.get('/strings/upper/:id', (req, res) => {
+app.get('/strings/upper/:string', (req, res) => {
   res.status(200).json({
-    result: uppercase(req.params.id),
+    result: uppercase(req.params.string),
   });
 });
 
-app.get('/strings/lower/:id', (req, res) => {
+app.get('/strings/lower/:string', (req, res) => {
   res.status(200).json({
-    result: lowercase(req.params.id),
+    result: lowercase(req.params.string),
   });
 });
 
-app.get('/strings/first-characters/:id', (req, res) => {
+app.get('/strings/first-characters/:string', (req, res) => {
   res.status(200).json({
-    result: firstCharacters(req.params.id, req.query.length),
+    result: firstCharacters(req.params.string, req.query.length),
   });
 });
 
@@ -46,7 +47,6 @@ app.get('/numbers/add/:a/and/:b', (req, res) => {
       error: 'Parameters must be valid numbers.',
     });
   }
-
   res.status(200).json({
     result: add(a, b),
   });
@@ -61,7 +61,6 @@ app.get('/numbers/subtract/:a/from/:b', (req, res) => {
       error: 'Parameters must be valid numbers.',
     });
   }
-
   res.status(200).json({
     result: subtract(b, a),
   });
@@ -80,7 +79,6 @@ app.post('/numbers/multiply', (req, res) => {
       error: 'Parameters "a" and "b" must be valid numbers.',
     });
   }
-
   res.status(200).json({
     result: multiply(a, b),
   });
@@ -95,7 +93,6 @@ app.post('/numbers/divide', (req, res) => {
       error: 'Unable to divide by 0.',
     });
   }
-
   if (Object.keys(req.body).length < 2) {
     res.status(400).json({
       error: 'Parameters "a" and "b" are required.',
@@ -105,7 +102,6 @@ app.post('/numbers/divide', (req, res) => {
       error: 'Parameters "a" and "b" must be valid numbers.',
     });
   }
-
   res.status(200).json({
     result: divide(a, b),
   });
@@ -120,7 +116,6 @@ app.post('/numbers/remainder', (req, res) => {
       error: 'Unable to divide by 0.',
     });
   }
-
   if (Object.keys(req.body).length < 2) {
     res.status(400).json({
       error: 'Parameters "a" and "b" are required.',
@@ -130,7 +125,6 @@ app.post('/numbers/remainder', (req, res) => {
       error: 'Parameters must be valid numbers.',
     });
   }
-
   res.status(200).json({
     result: remainder(a, b),
   });
@@ -163,6 +157,45 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
 app.post('/arrays/remove-element', (req, res) => {
   res.status(200).json({
     result: removeNthElement(req.query.index, req.body.array),
+  });
+});
+
+app.post('/booleans/negate', (req, res) => {
+  res.status(200).json({
+    result: negate(req.body.value),
+  });
+});
+
+app.post('/booleans/truthiness', (req, res) => {
+  res.status(200).json({
+    result: truthiness(req.body.value),
+  });
+});
+
+app.get('/booleans/is-odd/:number', (req, res) => {
+  const number = parseInt(req.params.number, 10);
+
+  if (Number.isNaN(number)) {
+    res.status(400).json({
+      error: 'Parameter must be a number.',
+    });
+  }
+  res.status(200).json({
+    result: isOdd(number),
+  });
+});
+
+app.get('/booleans/:string/starts-with/:char', (req, res) => {
+  const { string } = req.params;
+  const { char } = req.params;
+
+  if (char.length > 1) {
+    res.status(400).json({
+      error: 'Parameter "character" must be a single character.',
+    });
+  }
+  res.status(200).json({
+    result: startsWith(char, string),
   });
 });
 
