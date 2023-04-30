@@ -20,7 +20,7 @@ const either = (a, b) => {
 };
 
 const none = (a, b) => {
-  if (a === false && b === false){
+  if (a === false && b === false) {
     return true;
   }
   return false;
@@ -128,5 +128,5 @@ module.exports = {
   isSquare,
   startsWith,
   containsVowels,
-  isLowerCase
+  isLowerCase,
 };

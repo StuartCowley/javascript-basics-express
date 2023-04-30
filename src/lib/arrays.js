@@ -44,13 +44,9 @@ const reverseWordsInArray = strings => {
   const newarray = [];
   let newstring = [];
   for (let n = 0; n < strings.length; n += 1) {
-    // Take strings[n] and make it an array
     newstring = strings[n].split('');
-    // Reverse the array
     newstring.reverse();
-    // Change the array back into a string
     const reversedstring = newstring.join('');
-    // Add it to the array of reversed strings
     newarray[n] = reversedstring;
   }
   return newarray;
@@ -71,7 +67,6 @@ const removeNthElement2 = (index, array) => {
 const elementsStartingWithAVowel = strings => {
   const newstring = strings.filter(word => {
     const lowercase = word.toLowerCase();
-    console.log(lowercase);
     if (
       lowercase.charAt(0) === 'a' ||
       lowercase.charAt(0) === 'e' ||
@@ -83,7 +78,7 @@ const elementsStartingWithAVowel = strings => {
     }
     return false;
   });
-  console.log(newstring);
+
   return newstring;
 };
 
@@ -101,10 +96,7 @@ const sumNumbers = numbers => {
 };
 
 const sortByLastLetter = strings => {
-  return strings.sort(
-    //  Note if a-b is negative (if a is smaller) it returns true, so the values stay put)
-    (a, b) => a.charCodeAt(a.length - 1) - b.charCodeAt(b.length - 1)
-  );
+  return strings.sort((a, b) => a.charCodeAt(a.length - 1) - b.charCodeAt(b.length - 1));
 };
 
 module.exports = {
@@ -122,5 +114,5 @@ module.exports = {
   elementsStartingWithAVowel,
   removeSpaces,
   sumNumbers,
-  sortByLastLetter
+  sortByLastLetter,
 };
