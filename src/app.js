@@ -1,9 +1,13 @@
 const express = require('express');
 const { sayHello, uppercase, lowercase } = require('./lib/strings');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
+const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
+const {} = require('./lib/arrays');
 
 const app = express();
 app.use(express.json());
+
+// strings
 
 app.get('/strings/hello/:string', (req, res) => {
   res.status(200).json({ result: sayHello(req.params.string) });
@@ -91,5 +95,34 @@ app.post('/numbers/remainder', (req, res) => {
     res.status(200).json({ result: remainder(a, b) });
   }
 });
+
+// booleans
+
+app.post('/booleans/negate', (req, res) => {
+  res.status(200).json({ result: negate(req.body.value) });
+});
+
+app.post('/booleans/truthiness', (req, res) => {
+  res.status(200).json({ result: truthiness(req.body.value) });
+});
+
+app.get('/booleans/is-odd/:a', (req, res) => {
+  const a = parseInt(req.params.a, 10);
+  if (Number.isNaN(a)) {
+    res.status(400).json({ error: 'Parameter must be a number.' });
+  } else {
+    res.status(200).json({ result: isOdd(a) });
+  }
+});
+
+app.get('/booleans/:string/starts-with/:char', (req, res) => {
+  if (req.params.char.length > 1) {
+    res.status(400).json({ error: 'Parameter "character" must be a single character.' });
+  } else {
+    res.status(200).json({ result: startsWith(req.params.char, req.params.string) });
+  }
+});
+
+// arrays
 
 module.exports = app;
